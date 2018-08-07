@@ -7,7 +7,7 @@ export default Route.extend({
   async model() {
     return {
       userPermissions : await this.get('store').findAll('user-permission'),
-      roles           : await this.get('store').findAll('role')
+      systemRoles     : await this.get('store').findAll('custom-system-role')
     };
   },
   actions: {

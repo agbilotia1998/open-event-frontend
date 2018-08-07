@@ -4,8 +4,10 @@ export default Controller.extend({
     openAddSystemRoleModal(role) {
       if (role) {
         this.set('role', role);
+        this.set('isNew', false);
       } else {
-        this.set('role', this.store.createRecord('role'));
+        this.set('role', this.store.createRecord('custom-system-role'));
+        this.set('isNew', true);
       }
       this.set('isAddSystemRoleModalOpen', true);
     },

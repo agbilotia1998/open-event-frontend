@@ -1,5 +1,9 @@
 <div class="header">
-  {{t 'Add New System Role'}}
+  {{#if isNew}}
+    {{t 'Add New System Role'}}
+  {{else}}
+    {{t 'Edit System Role'}}
+  {{/if}}
 </div>
 <div class="content">
   <form class="ui {{if isLoading 'loading'}} form" id="add-system-role-form" autocomplete="off" {{action 'addRole' on='submit' preventDefault=true}}>
@@ -7,14 +11,14 @@
       <label class="required">
         {{t 'Name'}}
       </label>
-      {{input type='text' name='role_name' value=role.titleName placeholder=(t 'Enter Role name')}}
+      {{input type='text' name='role_name' value=role.name placeholder=(t 'Enter Role name')}}
     </div>
     <div class="field">
       <label class="required">
         {{t 'Panels'}}
       </label>
-      {{#ui-dropdown class='fluid multiple selection' selected=role.name}}
-        {{input type='hidden' name='selected_panels' value=role.name}}
+      {{#ui-dropdown class='fluid multiple selection' selected=role.panelPermission onChange=(action (mut role.panelPermission))}}
+        {{input type='hidden' name='selected_panels' value=role.panelPermission}}
         <i class="dropdown icon"></i>
         <div class="default text">
           {{t 'Please select Panel(s)'}}
@@ -60,7 +64,11 @@
     {{t 'Cancel'}}
   </button>
   <button type="submit" form="add-system-role-form" class="ui green right labeled icon button">
-    {{t 'Add Role'}}
+    {{#if isNew}}
+      {{t 'Add Role'}}
+    {{else}}
+      {{t 'Edit Role'}}
+    {{/if}}
     <i class="checkmark icon"></i>
   </button>
 </div>
